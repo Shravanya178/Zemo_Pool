@@ -1047,8 +1047,12 @@ def upload_case_study():
         
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
-
+@app.route('/')
+def index():
+    return 'TropoScan backend is running!'
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))  
+
     print("🌪️  TropoScan Integrated Backend Server")
     print("="*50)
     print(f"📁 Mainbackend path: {mainbackend_path}")
@@ -1056,7 +1060,7 @@ if __name__ == '__main__':
     print(f"📍 Model path: {troposcope_model.model_path if REAL_MODEL_AVAILABLE else 'N/A'}")
     print(f"✅ Model loaded: {troposcope_model.model_loaded}")
     print("="*50)
-    print("🚀 Starting server on http://localhost:5000")
+    print(f"🚀 Starting server on http://0.0.0.0:{port}")
     print("📊 Endpoints:")
     print("   • GET  /api/health - Server health check")
     print("   • POST /api/detect - Upload and analyze images")
@@ -1070,5 +1074,5 @@ if __name__ == '__main__':
     print("   • GET  /api/sample/<id>/preview - Get sample image preview")
     print("   • POST /api/sample/<id> - Process sample image")
     print("-"*50)
-    
-    app.run(debug=True, host='0.0.0.0', port=5000)
+
+    app.run(debug=True, host='0.0.0.0', port=port)  
