@@ -1,7 +1,0 @@
-torch
-torchvision
-pillow
-numpy
-flask
-flask-cors
-opencv-python
